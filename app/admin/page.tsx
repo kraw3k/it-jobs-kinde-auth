@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import prisma from "@/lib/prisma";
 
 export default async function Admin() {
   const { getAccessToken, getPermissions } = getKindeServerSession();
@@ -8,6 +9,8 @@ export default async function Admin() {
 
   const accessToken = await getAccessToken();
   const permissions = await getPermissions();
+
+  const users = await prisma.user.findMany();
 
   return (
     <>
@@ -18,6 +21,7 @@ export default async function Admin() {
           <code className="font-mono font-bold">app/admin/page.tsx</code>
         </p>
         <pre>{JSON.stringify(permissions?.permissions, null, 2)}</pre>
+          <pre>{JSON.stringify(users, null, 2)}</pre>
       </div>
     </>
   );
