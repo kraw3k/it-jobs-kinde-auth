@@ -8,8 +8,11 @@ export async function GET() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || user == null || !user.id)
-    throw new Error("something went wrong with authentication" + user);
+  if (!user || user == null || !user.id){
+    // TODO: log to error tracking service
+    console.log("Something went wrong with authentication, user: " + user);
+    return NextResponse.redirect(process.env.KINDE_SITE_URL + "/login");
+  }
 
   let dbUser = await prisma.user.findUnique({
     where: { kindeId: user.id },
