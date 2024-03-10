@@ -28,49 +28,54 @@ export default function Header() {
     return path === pathname;
   };
 
+  const pages = [
+    {
+      name: "Oferty pracy",
+      path: "/offers",
+    },
+    {
+      name: "Pracodawcy",
+      path: "/companies",
+    },
+    {
+      name: "Dla pracodawcy",
+      path: "/for-employers",
+    },
+    {
+      name: "Admin",
+      path: "/admin",
+    },
+  ];
+
   return (
     <Navbar maxWidth={"full"}>
-      <NavbarBrand>
-        <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-          <path
-            clipRule="evenodd"
-            d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-            fill="currentColor"
-            fillRule="evenodd"
-          />
-        </svg>
-        <p className="font-bold text-inherit">IT-JOBS</p>
-      </NavbarBrand>
+        <NavbarBrand>
+      <NextLink href="/" className="flex items-center">
+          <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
+            <path
+              clipRule="evenodd"
+              d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
+              fill="currentColor"
+              fillRule="evenodd"
+            />
+          </svg>
+          <p className="font-bold text-inherit">IT-JOBS</p>
+      </NextLink>
+        </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem isActive={isActive("/")}>
-          <Link
-            color={isActive("/") ? "primary" : "foreground"}
-            href="/"
-            as={NextLink}
-          >
-            Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={isActive("/admin")}>
-          <Link
-            color={isActive("/admin") ? "primary" : "foreground"}
-            href="/admin"
-            aria-current="page"
-            as={NextLink}
-          >
-            Admin
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={isActive("/profile")}>
-          <Link
-            color={isActive("/profile") ? "primary" : "foreground"}
-            href="/profile"
-            as={NextLink}
-          >
-            Profile
-          </Link>
-        </NavbarItem>
+        {pages.map((page) => (
+          <NavbarItem isActive={isActive(page.path)} key={page.path}>
+            <Link
+              color={isActive(page.path) ? "primary" : "foreground"}
+              href={page.path}
+              aria-current="page"
+              as={NextLink}
+            >
+              {page.name}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
 
       <NavbarContent as="div" justify="end">
@@ -82,7 +87,7 @@ export default function Header() {
               href="/api/auth/login"
               variant="flat"
             >
-              Sign Up
+              Zaloguj
             </Button>
           </NavbarItem>
         )}
@@ -101,21 +106,21 @@ export default function Header() {
               disabledKeys={["email"]}
             >
               <DropdownItem isReadOnly key="email" className="gap-2">
-                <p className="font-semibold">Signed in as</p>
+                <p className="font-semibold">Zalogowano jako</p>
                 <p className="font-semibold">{user?.email}</p>
               </DropdownItem>
               <DropdownItem
                 key="settings"
                 onClick={() => router.push("/profile")}
               >
-                Profile
+                Mój profil
               </DropdownItem>
               <DropdownItem
                 key="logout"
                 color="danger"
                 onClick={() => router.push("/api/auth/logout")}
               >
-                Log Out
+                Wyloguj
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>

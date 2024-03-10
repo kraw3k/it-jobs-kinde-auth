@@ -19,3 +19,46 @@ model User {
   firstName String
   lastName  String
 }
+
+model JobOffer {
+  id                Int             @id @default(autoincrement())
+  title             String
+  description       String
+  company           String
+  location          String
+  salaryFixed       Int
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  categoryId        Int
+  technologyId      Int
+  contractTypeId    Int
+  experienceLevelId Int
+  Category          Category        @relation(fields: [categoryId], references: [id])
+  Technology        Technology      @relation(fields: [technologyId], references: [id])
+  ContractType      ContractType    @relation(fields: [contractTypeId], references: [id])
+  ExperienceLevel   ExperienceLevel @relation(fields: [experienceLevelId], references: [id])
+}
+
+model Category {
+  id        Int        @id @default(autoincrement())
+  name      String
+  JobOffers JobOffer[]
+}
+
+model Technology {
+  id        Int        @id @default(autoincrement())
+  name      String
+  JobOffers JobOffer[]
+}
+
+model ContractType {
+  id        Int        @id @default(autoincrement())
+  name      String
+  JobOffers JobOffer[]
+}
+
+model ExperienceLevel {
+  id        Int        @id @default(autoincrement())
+  name      String
+  JobOffers JobOffer[]
+}
