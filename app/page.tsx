@@ -1,4 +1,3 @@
-import JobsTable from "@/components/JobsTable";
 import { Image } from "@nextui-org/image";
 import { Code } from "@nextui-org/react";
 import Link from "next/link";
