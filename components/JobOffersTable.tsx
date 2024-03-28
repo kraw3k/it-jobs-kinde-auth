@@ -71,7 +71,7 @@ const JobOffersTable: React.FC<JobOffersTableProps> = ({ jobOffers }) => {
       </TableHeader>
       <TableBody>
         {items.map((item) => (
-          <TableRow>
+          <TableRow key={item.id}>
             <TableCell>
               <Link href={`offers/${item.id}`} className="text-primary">{item.title}</Link>
             </TableCell>
