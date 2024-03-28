@@ -39,7 +39,7 @@ export default function Header() {
     },
     {
       name: "Dla pracodawcy",
-      path: "/for-employers",
+      path: "/employer",
     },
     {
       name: "Admin",

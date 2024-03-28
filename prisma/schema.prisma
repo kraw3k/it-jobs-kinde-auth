@@ -1,15 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider          = "postgresql"
-  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
@@ -24,19 +21,35 @@ model JobOffer {
   id                Int             @id @default(autoincrement())
   title             String
   description       String
-  company           String
-  location          String
-  salaryFixed       Int
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
+  salaryMin         Int
+  salaryMax         Int
+  companyId         Int
+  cityId            Int
   categoryId        Int
   technologyId      Int
   contractTypeId    Int
   experienceLevelId Int
+  Company           Company         @relation(fields: [companyId], references: [id])
+  City              City            @relation(fields: [cityId], references: [id])
   Category          Category        @relation(fields: [categoryId], references: [id])
-  Technology        Technology      @relation(fields: [technologyId], references: [id])
   ContractType      ContractType    @relation(fields: [contractTypeId], references: [id])
   ExperienceLevel   ExperienceLevel @relation(fields: [experienceLevelId], references: [id])
+  Technology        Technology      @relation(fields: [technologyId], references: [id])
+}
+
+model Company {
+  id        Int        @id @default(autoincrement())
+  name      String
+  logoUrl   String?
+  JobOffers JobOffer[]
+}
+
+model City {
+  id        Int        @id @default(autoincrement())
+  name      String
+  JobOffers JobOffer[]
 }
 
 model Category {

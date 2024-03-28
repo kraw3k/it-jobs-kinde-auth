@@ -1,5 +1,6 @@
 "use client";
 
+import { formatCurrency, formatSalary } from "@/utils/helpers";
 import {
   Table,
   TableHeader,
@@ -8,8 +9,6 @@ import {
   TableRow,
   TableCell,
   Pagination,
-  getKeyValue,
-  Tab,
 } from "@nextui-org/react";
 import Link from "next/link";
 import React from "react";
@@ -18,9 +17,14 @@ import "tailwindcss/tailwind.css";
 type JobOffer = {
   id: number;
   title: string;
-  company: string;
-  location: string;
-  salaryFixed: number
+  salaryMin: number;
+  salaryMax: number;
+  Company: {
+    name: string;
+  };
+  City: {
+    name: string;
+  };
 };
 
 type JobOffersTableProps = {
@@ -42,14 +46,13 @@ const JobOffersTable: React.FC<JobOffersTableProps> = ({ jobOffers }) => {
 
   return (
     <Table
-      aria-label="Example table with client side pagination"
+      aria-label="Oferty pracy"
       bottomContent={
         <div className="flex w-full justify-center">
           <Pagination
             isCompact
             showControls
             showShadow
-            color="secondary"
             page={page}
             total={pages}
             onChange={(page) => setPage(page)}
@@ -61,23 +64,22 @@ const JobOffersTable: React.FC<JobOffersTableProps> = ({ jobOffers }) => {
       }}
     >
       <TableHeader>
-        <TableColumn key="title">Tytuł</TableColumn>
-        <TableColumn key="company">Firma</TableColumn>
-        <TableColumn key="location">Lokalizacja</TableColumn>
-        <TableColumn key="salaryFixed">Wynagrodzenie</TableColumn>
+        <TableColumn>Tytuł</TableColumn>
+        <TableColumn>Firma</TableColumn>
+        <TableColumn>Lokalizacja</TableColumn>
+        <TableColumn>Widełki</TableColumn>
       </TableHeader>
-      <TableBody items={items}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>
-                <Link href={`offers/${item.id}`}>
-                  {getKeyValue(item, columnKey)}
-                </Link>
-              </TableCell>
-            )}
+      <TableBody>
+        {items.map((item) => (
+          <TableRow>
+            <TableCell>
+              <Link href={`offers/${item.id}`} className="text-primary">{item.title}</Link>
+            </TableCell>
+            <TableCell>{item.Company.name}</TableCell>
+            <TableCell>{item.City.name}</TableCell>
+            <TableCell>{formatSalary(item.salaryMin, item.salaryMax)}</TableCell>
           </TableRow>
-        )}
+        ))}
       </TableBody>
     </Table>
   );
