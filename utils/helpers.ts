@@ -10,5 +10,5 @@ export const formatCurrency = (amount: number) => {
 
 export const formatSalary = (min: number, max: number) => {
   if (min === max) return formatCurrency(min);
-  return nf.formatRange(min, max);
+    return `${formatCurrency(min)} - ${formatCurrency(max)}`;
 };
