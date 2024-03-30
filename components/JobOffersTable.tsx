@@ -73,7 +73,7 @@ const JobOffersTable: React.FC<JobOffersTableProps> = ({ jobOffers }) => {
         {items.map((item) => (
           <TableRow key={item.id}>
             <TableCell>
-              <Link href={`offers/${item.id}`} className="text-primary">{item.title}</Link>
+              <Link href={`/offers/${item.id}`} className="text-primary">{item.title}</Link>
             </TableCell>
             <TableCell>{item.Company.name}</TableCell>
             <TableCell>{item.City.name}</TableCell>

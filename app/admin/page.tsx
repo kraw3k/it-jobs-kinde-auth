@@ -1,6 +1,5 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/lib/prisma";
-import { seedJobOffers } from "@/admin/dbSeed";
 import CompanyCreateForm from "@/components/employer/CompanyCreateForm";
 
 export default async function Admin() {
@@ -12,8 +11,6 @@ export default async function Admin() {
   const permissions = await getPermissions();
 
   const users = await prisma.user.findMany();
-
-  // seedJobOffers();
 
   return (
     <>
@@ -28,3 +25,4 @@ export default async function Admin() {
     </>
   );
 }
+
