@@ -1,6 +1,6 @@
 "use client";
 
-import { formatCurrency, formatSalary } from "@/utils/helpers";
+import { formatSalary } from "@/utils/helpers";
 import {
   Table,
   TableHeader,
@@ -13,22 +13,10 @@ import {
 import Link from "next/link";
 import React from "react";
 import "tailwindcss/tailwind.css";
-
-type JobOffer = {
-  id: number;
-  title: string;
-  salaryMin: number;
-  salaryMax: number;
-  Company: {
-    name: string;
-  };
-  City: {
-    name: string;
-  };
-};
+import { JobOfferWithExternalModels } from "@/utils/types";
 
 type JobOffersTableProps = {
-  jobOffers: JobOffer[];
+  jobOffers: JobOfferWithExternalModels[];
 };
 
 const JobOffersTable: React.FC<JobOffersTableProps> = ({ jobOffers }) => {
@@ -73,11 +61,15 @@ const JobOffersTable: React.FC<JobOffersTableProps> = ({ jobOffers }) => {
         {items.map((item) => (
           <TableRow key={item.id}>
             <TableCell>
-              <Link href={`/offers/${item.id}`} className="text-primary">{item.title}</Link>
+              <Link href={`/offers/${item.id}`} className="text-primary">
+                {item.title}
+              </Link>
             </TableCell>
             <TableCell>{item.Company.name}</TableCell>
             <TableCell>{item.City.name}</TableCell>
-            <TableCell>{formatSalary(item.salaryMin, item.salaryMax)}</TableCell>
+            <TableCell>
+              {formatSalary(item.salaryMin, item.salaryMax)}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

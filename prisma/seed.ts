@@ -8,7 +8,8 @@ const seedUsers = async () => {
       email: "kacper5047@gmail.com",
       firstName: "Kacper",
       lastName: "K",
-      kindeId: "1",
+      kindeId: "kp_0feb56eed52845c8ab10a140ddb76775",
+      avatarUrl: "https://www.shareicon.net/data/512x512/2015/09/18/103160_man_512x512.png",
     },
   });
   return { kacper };
@@ -37,7 +38,15 @@ const seedCompanies = async () => {
     },
   });
 
-  return { futureProcessing, sii, netguru };
+  const airSlate = await prisma.company.create({
+    data: {
+      name: "airSlate",
+      description: "airSlate is a global SaaS technology company that serves over one hundred million users worldwide with its electronic signature, document management and workflow automation solutions, which include signNow, pdfFiller, DocHub, WorkFlow, Instapage, and US Legal Forms.",
+      logoUrl: "https://public.justjoin.it/companies/logos/original/a19c9f3b27484f598d817f45052e9a72d7fbbb48.png?1709653207",
+    },
+  });
+
+  return { futureProcessing, sii, netguru, airSlate };
 };
 const seedCategories = async () => {
   const frontend = await prisma.category.create({

@@ -1,8 +1,7 @@
 import prisma from "@/lib/prisma";
 import { companyLogoPlaceholderUrl } from "@/utils/consts";
-import { Image } from "@nextui-org/react";
+import { Card, CardBody, Code, Image } from "@nextui-org/react";
 import JobOffersTable from "@/components/JobOffersTable";
-import React from "react";
 
 export default async function CompanyPage({
   params,
@@ -19,6 +18,7 @@ export default async function CompanyPage({
           ContractType: true,
           Category: true,
           Technology: true,
+          ExperienceLevel: true,
         },
       },
     },
@@ -31,12 +31,34 @@ export default async function CompanyPage({
   const logoUrl = company.logoUrl || companyLogoPlaceholderUrl;
   return (
     <div>
-      <h1>{company.name}</h1>
-      <Image src={logoUrl} alt={company.name} width={200} height={200} />
-      <ul>
-        <h1 className="text-xl mb-4">Dostępne oferty pracy</h1>
+      <Card>
+        <CardBody>
+          <div className={"flex gap-6 p-3"}>
+            <div
+              className={"flex items-center justify-center border rounded p-2"}
+              style={{ width: "150px", height: "150px" }}
+            >
+              <Image
+                alt={company.name}
+                height={"100%"}
+                radius="none"
+                src={logoUrl}
+                width={"100%"}
+              />
+            </div>
+            <div>
+              <Code className="text-4xl">{company.name}</Code>
+              <br />
+              <p>{company.description}</p>
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+      <br />
+      <h1 className="text-xl mb-4">Dostępne oferty pracy</h1>
+      {company.JobOffers.length && (
         <JobOffersTable jobOffers={company.JobOffers} />
-      </ul>
+      )}
     </div>
   );
 }
