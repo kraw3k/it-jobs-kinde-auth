@@ -11,6 +11,7 @@ const JobOffersPage: React.FC = async () => {
                 City: true,
                 ContractType: true,
                 Company: true,
+                ExperienceLevel: true,
             }
         }
     )
