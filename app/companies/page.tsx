@@ -1,12 +1,8 @@
-import prisma from "@/lib/prisma";
 import CompaniesTable from "@/components/company/CompaniesTable";
+import { getCompaniesWithExternalModels } from "@/services/companies/getCompanies";
 
 export default async function Page() {
-  const companies = await prisma.company.findMany({
-    include: {
-      JobOffers: true,
-    },
-  });
+  const companies = await getCompaniesWithExternalModels();
   if (!companies) {
     return <div>Brak firm do wyświetlenia</div>;
   }

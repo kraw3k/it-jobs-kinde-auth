@@ -10,8 +10,13 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { User } from "@nextui-org/user";
+import { User as UserType } from "@prisma/client";
 
-export default function AvatarDropdown({ user }: { user: any }) {
+type AvatarDropdownProps = {
+  user: UserType | null;
+};
+
+export default function AvatarDropdown({ user }: AvatarDropdownProps) {
   return (
     <Dropdown
       radius="sm"

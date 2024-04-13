@@ -10,12 +10,20 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  kindeId   String  @unique
-  email     String  @unique
-  firstName String
-  lastName  String
-  avatarUrl String?
+  id               Int       @id @default(autoincrement())
+  kindeId          String    @unique
+  email            String    @unique
+  firstName        String
+  lastName         String
+  avatarUrl        String?
+  role             Role      @default(USER)
+  managedCompanies Company[]
+}
+
+enum Role {
+  USER
+  EMPLOYER
+  ADMIN
 }
 
 model JobOffer {
@@ -46,6 +54,7 @@ model Company {
   description String?
   logoUrl     String?
   JobOffers   JobOffer[]
+  User        User[]
 }
 
 model City {

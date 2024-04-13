@@ -7,22 +7,15 @@ import {
 } from "@nextui-org/react";
 import NextLink from "next/link";
 import { Button } from "@nextui-org/button";
-import prisma from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import NavLinks from "@/components/ui/header/NavLinks";
 import AvatarDropdown from "@/components/ui/header/AvatarDropdown";
+import { getUser } from "@/services/users/getUser";
 
 export default async function Header() {
-  const { getUser } = getKindeServerSession();
-  const kindeUser = await getUser();
-
-  const user = kindeUser
-    ? await prisma.user.findUnique({
-        where: {
-          kindeId: await kindeUser?.id,
-        },
-      })
-    : null;
+  const { getUser: getKindeUser } = getKindeServerSession();
+  const kindeUser = await getKindeUser();
+  const user = await getUser();
 
   return (
     <Navbar maxWidth={"full"}>

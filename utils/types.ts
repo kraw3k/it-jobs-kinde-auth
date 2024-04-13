@@ -20,7 +20,17 @@ export type JobOfferWithExternalModels = Prisma.JobOfferGetPayload<
 const companyWithExternalModels = Prisma.validator<Prisma.CompanyDefaultArgs>()(
   {
     include: {
-      JobOffers: true,
+      JobOffers: {
+        include: {
+          City: true,
+          Company: true,
+          ContractType: true,
+          Category: true,
+          Technology: true,
+          ExperienceLevel: true,
+        },
+
+      },
     },
   },
 );
