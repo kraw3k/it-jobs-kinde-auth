@@ -11,6 +11,12 @@ type CompanyEditPageProps = {
   company: Company;
 };
 
+type EditedCompanyData = {
+  name: string;
+  description?: string;
+  logoUrl?: string;
+};
+
 async function CompanyEditPage({ company }: CompanyEditPageProps) {
   async function updateCompany(formData: FormData) {
     "use server";
@@ -18,16 +24,18 @@ async function CompanyEditPage({ company }: CompanyEditPageProps) {
     if (!company) return;
 
     const name = formData.get("name") as string;
+    const description = formData.get("description") as string;
     const logo = formData.get("logo") as File;
 
-    let logoUrl = null;
-    if (logo) {
-      logoUrl = await uploadFileToCloudStorage(logo as File);
+    const data: EditedCompanyData = { name, description };
+
+    if (logo.size > 0) {
+      data["logoUrl"] = await uploadFileToCloudStorage(logo as File);
     }
 
     await prisma.company.update({
       where: { id: company.id },
-      data: { name, logoUrl },
+      data,
     });
     redirect(`/employer/company/${company.id}`);
   }
@@ -42,6 +50,14 @@ async function CompanyEditPage({ company }: CompanyEditPageProps) {
           name="name"
           defaultValue={company.name}
           label="Nazwa"
+          labelPlacement="outside"
+        />
+        <br />
+        <Input
+          type="texarea"
+          name="description"
+          defaultValue={company.description || ""}
+          label="Opis"
           labelPlacement="outside"
         />
         <br />
