@@ -1,19 +1,11 @@
-import prisma from "@/lib/prisma";
 import { formatSalary } from "@/utils/helpers";
+import { getJobOfferWithExternalModels } from "@/services/jobOffers/getJobOffer";
+import { redirect } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const jobOffer = await prisma.jobOffer.findUnique({
-    where: { id: Number(params.id) },
-    include: {
-      Company: true,
-      City: true,
-      ExperienceLevel: true,
-      ContractType: true,
-      Technology: true,
-    },
-  });
+  const jobOffer = await getJobOfferWithExternalModels(params.id);
   if (!jobOffer) {
-    return <h1>Job offer not found</h1>;
+    return redirect("/not-found");
   }
 
   return (
@@ -26,6 +18,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <li className="my-2">
           Wynagrodzenie: {formatSalary(jobOffer.salaryMin, jobOffer.salaryMax)}
         </li>
+        <li className="my-2">Kategoria: {jobOffer.Category.name}</li>
         <li className="my-2">Doświadczenie: {jobOffer.ExperienceLevel.name}</li>
         <li className="my-2">Typ kontraktu: {jobOffer.ContractType.name}</li>
         <li className="my-2">Technologie: {jobOffer.Technology.name}</li>
