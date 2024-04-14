@@ -46,7 +46,16 @@ const seedCompanies = async () => {
     },
   });
 
-  return { futureProcessing, sii, netguru, airSlate };
+  const fabres = await prisma.company.create({
+    data: {
+      name: "Fabres",
+      description: "We are Fabres, Poland-based, Poznań-located IT company cooperating closely with European market. Our main goal is to provide the best tailor-made software solutions out there ;)",
+      logoUrl: "https://public.justjoin.it/companies/logos/original/8dedaa414a8b7d772908f520f00a21351dc84b13.png?1706109772",
+    },
+  });
+
+
+  return { futureProcessing, sii, netguru, airSlate, fabres };
 };
 const seedCategories = async () => {
   const frontend = await prisma.category.create({

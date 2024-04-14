@@ -45,6 +45,7 @@ model JobOffer {
   Category          Category        @relation(fields: [categoryId], references: [id])
   ContractType      ContractType    @relation(fields: [contractTypeId], references: [id])
   ExperienceLevel   ExperienceLevel @relation(fields: [experienceLevelId], references: [id])
+  // TODO: Should be Technology[], allow multiple technologies
   Technology        Technology      @relation(fields: [technologyId], references: [id])
 }
 

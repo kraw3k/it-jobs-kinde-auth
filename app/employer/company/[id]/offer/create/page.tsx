@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { CompanyWithExternalModels } from "@/utils/types";
 import OfferCreateForm from "@/components/offer/OfferCreateForm";
+import sanitizeHtml from "sanitize-html";
 
 type PageProps = {
   company: CompanyWithExternalModels;
@@ -31,7 +32,7 @@ async function Page({ company }: PageProps) {
     const offer = await prisma.jobOffer.create({
       data: {
         title: formData.get("title") as string,
-        description: formData.get("description") as string,
+        description: sanitizeHtml(formData.get("description") as string),
         companyId: company.id,
         salaryMin: Number(formData.get("salaryMin")),
         salaryMax: Number(formData.get("salaryMax")),
