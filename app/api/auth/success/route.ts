@@ -8,7 +8,7 @@ export async function GET() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || user == null || !user.id){
+  if (!user || !user.id){
     // TODO: log to error tracking service
     console.log("Something went wrong with authentication, user: " + user);
     return NextResponse.redirect(process.env.KINDE_SITE_URL + "/login");
