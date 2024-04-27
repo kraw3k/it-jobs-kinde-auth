@@ -92,24 +92,6 @@ export const getUserWithExternalModels = async () => {
           User: true,
         },
       },
-
-      // applications: {
-      //   include: {
-      //     JobOffer: {
-      //       include: {
-      //         City: true,
-      //         Company: true,
-      //         ContractType: true,
-      //         Category: true,
-      //         Technology: true,
-      //         ExperienceLevel: true,
-      //         Application: true,
-      //       },
-      //     },
-      //     ApplicationStatus: true,
-      //     User: true,
-      //   },
-      // },
     },
   });
 

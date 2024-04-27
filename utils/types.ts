@@ -29,13 +29,7 @@ const companyWithExternalModels = Prisma.validator<Prisma.CompanyDefaultArgs>()(
           Category: true,
           Technology: true,
           ExperienceLevel: true,
-          Application: {
-            include: {
-              ApplicationStatus: true,
-              JobOffer: true,
-              User: true,
-            }
-          },
+          Application: true,
         },
       },
     },
