@@ -1,21 +1,24 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { User } from "@nextui-org/user";
+import ApplicationsTable from "@/components/employer/ApplicationsTable";
+import { getUserWithExternalModels } from "@/services/users/getUser";
 
 export default async function Profile() {
-  const { getUser } = getKindeServerSession();
-
-  const user = await getUser();
+  const user = await getUserWithExternalModels();
 
   return (
     <div>
-      <h1 className="text-xl mb-4">Profile page</h1>
+      <h1 className="text-xl mb-4">Profil użytkownika</h1>
       <User
-        name={`${user?.given_name} ${user?.family_name}`}
-        description={user?.email}
+        name={`${user.firstName} ${user.lastName}`}
+        description={user.email}
         avatarProps={{
-          src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+          src: user.avatarUrl || undefined,
         }}
       />
+      <br />
+      <br />
+      <h1 className="text-xl mb-4">Aplikacje</h1>
+      <ApplicationsTable applications={user.applications} />
     </div>
   );
 }

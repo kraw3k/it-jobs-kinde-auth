@@ -10,14 +10,15 @@ datasource db {
 }
 
 model User {
-  id               Int       @id @default(autoincrement())
-  kindeId          String    @unique
-  email            String    @unique
+  id               Int           @id @default(autoincrement())
+  kindeId          String        @unique
+  email            String        @unique
   firstName        String
   lastName         String
   avatarUrl        String?
-  role             Role      @default(USER)
+  role             Role          @default(USER)
   managedCompanies Company[]
+  applications     Application[]
 }
 
 enum Role {
@@ -47,6 +48,7 @@ model JobOffer {
   ExperienceLevel   ExperienceLevel @relation(fields: [experienceLevelId], references: [id])
   // TODO: Should be Technology[], allow multiple technologies
   Technology        Technology      @relation(fields: [technologyId], references: [id])
+  Application       Application[]
 }
 
 model Company {
@@ -86,4 +88,27 @@ model ExperienceLevel {
   id        Int        @id @default(autoincrement())
   name      String
   JobOffers JobOffer[]
+}
+
+model ApplicationStatus {
+  id          Int           @id @default(autoincrement())
+  name        String
+  Application Application[]
+}
+
+model Application {
+  id                  Int                @id @default(autoincrement())
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  fullName            String
+  email               String
+  phone               String
+  cvUrl               String
+  description         String?
+  User                User               @relation(fields: [userId], references: [id])
+  userId              Int
+  ApplicationStatus   ApplicationStatus? @relation(fields: [applicationStatusId], references: [id])
+  applicationStatusId Int?
+  JobOffer            JobOffer           @relation(fields: [jobOfferId], references: [id])
+  jobOfferId          Int
 }

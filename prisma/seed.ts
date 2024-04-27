@@ -9,7 +9,9 @@ const seedUsers = async () => {
       firstName: "Kacper",
       lastName: "K",
       kindeId: "kp_0feb56eed52845c8ab10a140ddb76775",
-      avatarUrl: "https://www.shareicon.net/data/512x512/2015/09/18/103160_man_512x512.png",
+      avatarUrl:
+        "https://www.shareicon.net/data/512x512/2015/09/18/103160_man_512x512.png",
+      role: "EMPLOYER",
     },
   });
   return { kacper };
@@ -41,19 +43,22 @@ const seedCompanies = async () => {
   const airSlate = await prisma.company.create({
     data: {
       name: "airSlate",
-      description: "airSlate is a global SaaS technology company that serves over one hundred million users worldwide with its electronic signature, document management and workflow automation solutions, which include signNow, pdfFiller, DocHub, WorkFlow, Instapage, and US Legal Forms.",
-      logoUrl: "https://public.justjoin.it/companies/logos/original/a19c9f3b27484f598d817f45052e9a72d7fbbb48.png?1709653207",
+      description:
+        "airSlate is a global SaaS technology company that serves over one hundred million users worldwide with its electronic signature, document management and workflow automation solutions, which include signNow, pdfFiller, DocHub, WorkFlow, Instapage, and US Legal Forms.",
+      logoUrl:
+        "https://public.justjoin.it/companies/logos/original/a19c9f3b27484f598d817f45052e9a72d7fbbb48.png?1709653207",
     },
   });
 
   const fabres = await prisma.company.create({
     data: {
       name: "Fabres",
-      description: "We are Fabres, Poland-based, Poznań-located IT company cooperating closely with European market. Our main goal is to provide the best tailor-made software solutions out there ;)",
-      logoUrl: "https://public.justjoin.it/companies/logos/original/8dedaa414a8b7d772908f520f00a21351dc84b13.png?1706109772",
+      description:
+        "We are Fabres, Poland-based, Poznań-located IT company cooperating closely with European market. Our main goal is to provide the best tailor-made software solutions out there ;)",
+      logoUrl:
+        "https://public.justjoin.it/companies/logos/original/8dedaa414a8b7d772908f520f00a21351dc84b13.png?1706109772",
     },
   });
-
 
   return { futureProcessing, sii, netguru, airSlate, fabres };
 };
@@ -275,6 +280,42 @@ const seedJobOffers = async () => {
   return { jobOffer1, jobOffer2, jobOffer3 };
 };
 
+const seedApplicationStatuses = async () => {
+  const pending = await prisma.applicationStatus.create({
+    data: {
+      name: "Pending",
+    },
+  });
+
+  const accepted = await prisma.applicationStatus.create({
+    data: {
+      name: "Accepted",
+    },
+  });
+
+  const rejected = await prisma.applicationStatus.create({
+    data: {
+      name: "Rejected",
+    },
+  });
+
+  return { pending, accepted, rejected };
+};
+
+const seedApplications = async () => {
+  const application1 = await prisma.application.create({
+    data: {
+      fullName: "Kacper K",
+      email: "kacper@test.pl",
+      phone: "123456789",
+      cvUrl: "https://www.google.com",
+      description: "I am a frontend developer",
+      userId: 1,
+      jobOfferId: 1,
+    },
+  });
+};
+
 async function main() {
   const users = await seedUsers();
   const companies = await seedCompanies();
@@ -284,6 +325,8 @@ async function main() {
   const experienceLevels = await seedExperienceLevels();
   const cities = await seedCities();
   const jobOffers = await seedJobOffers();
+  const applicationStatuses = await seedApplicationStatuses();
+  const applications = await seedApplications();
 }
 
 main()

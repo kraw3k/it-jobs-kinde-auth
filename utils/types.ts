@@ -10,6 +10,12 @@ const jobOfferWithExternalModels =
       Technology: true,
       ExperienceLevel: true,
       ContractType: true,
+      Application: {
+        include: {
+          ApplicationStatus: true,
+          User: true,
+        },
+      },
     },
   });
 export type JobOfferWithExternalModels = Prisma.JobOfferGetPayload<
@@ -28,12 +34,40 @@ const companyWithExternalModels = Prisma.validator<Prisma.CompanyDefaultArgs>()(
           Category: true,
           Technology: true,
           ExperienceLevel: true,
+          Application: {
+            include: {
+              ApplicationStatus: true,
+              JobOffer: true,
+              User: true,
+            }
+          },
         },
-
       },
     },
   },
 );
 export type CompanyWithExternalModels = Prisma.CompanyGetPayload<
   typeof companyWithExternalModels
+>;
+
+// *** Application ***
+const applicationWithExternalModels =
+  Prisma.validator<Prisma.ApplicationDefaultArgs>()({
+    include: {
+      JobOffer: {
+        include: {
+          City: true,
+          Company: true,
+          ContractType: true,
+          Category: true,
+          Technology: true,
+          ExperienceLevel: true,
+        },
+      },
+      ApplicationStatus: true,
+      User: true,
+    },
+  });
+export type ApplicationWithExternalModels = Prisma.ApplicationGetPayload<
+  typeof applicationWithExternalModels
 >;

@@ -1,10 +1,11 @@
 import prisma from "@/lib/prisma";
 
-export const getCompanyWithExternalModels = async (id: string) => {
-  return prisma.company.findUnique({
+export const getApplicationWithExternalModels = async (id: string) => {
+  return prisma.application.findUnique({
     where: { id: Number(id) },
     include: {
-      JobOffers: {
+      ApplicationStatus: true,
+      JobOffer: {
         include: {
           City: true,
           Company: true,
@@ -12,9 +13,9 @@ export const getCompanyWithExternalModels = async (id: string) => {
           Category: true,
           Technology: true,
           ExperienceLevel: true,
-          Application: true,
         },
       },
+      User: true,
     },
   });
 };

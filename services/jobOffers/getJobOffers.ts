@@ -9,6 +9,7 @@ export const getOffersWithExternalModels = async () => {
       Category: true,
       Technology: true,
       ExperienceLevel: true,
+      Application: true,
     },
   });
 };

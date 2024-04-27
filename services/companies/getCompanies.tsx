@@ -11,6 +11,7 @@ export const getCompaniesWithExternalModels = async () => {
           Category: true,
           Technology: true,
           ExperienceLevel: true,
+          Application: true,
         },
       },
     },

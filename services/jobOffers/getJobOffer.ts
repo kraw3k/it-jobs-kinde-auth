@@ -10,6 +10,22 @@ export const getJobOfferWithExternalModels = async (id: string) => {
       Category: true,
       Technology: true,
       ExperienceLevel: true,
+      Application: {
+        include: {
+          ApplicationStatus: true,
+          JobOffer: {
+            include: {
+              City: true,
+              Company: true,
+              ContractType: true,
+              Category: true,
+              Technology: true,
+              ExperienceLevel: true,
+            },
+          },
+          User: true,
+        },
+      },
     },
   });
 };

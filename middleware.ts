@@ -10,5 +10,5 @@ export default withAuth(async function middleware(
   // https://nextjs.org/docs/messages/nested-middleware
 });
 export const config = {
-  matcher: ["/admin", "/profile", "/employer"],
+  matcher: ["/admin", "/profile", "/employer", "/offers"],
 };

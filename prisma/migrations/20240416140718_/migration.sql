@@ -84,6 +84,31 @@ CREATE TABLE "ExperienceLevel" (
 );
 
 -- CreateTable
+CREATE TABLE "ApplicationStatus" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "ApplicationStatus_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Application" (
+    "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "fullName" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "cvUrl" TEXT NOT NULL,
+    "description" TEXT,
+    "userId" INTEGER NOT NULL,
+    "applicationStatusId" INTEGER,
+    "jobOfferId" INTEGER NOT NULL,
+
+    CONSTRAINT "Application_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_CompanyToUser" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
@@ -118,6 +143,15 @@ ALTER TABLE "JobOffer" ADD CONSTRAINT "JobOffer_experienceLevelId_fkey" FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE "JobOffer" ADD CONSTRAINT "JobOffer_technologyId_fkey" FOREIGN KEY ("technologyId") REFERENCES "Technology"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Application" ADD CONSTRAINT "Application_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Application" ADD CONSTRAINT "Application_applicationStatusId_fkey" FOREIGN KEY ("applicationStatusId") REFERENCES "ApplicationStatus"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Application" ADD CONSTRAINT "Application_jobOfferId_fkey" FOREIGN KEY ("jobOfferId") REFERENCES "JobOffer"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_CompanyToUser" ADD CONSTRAINT "_CompanyToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Company"("id") ON DELETE CASCADE ON UPDATE CASCADE;

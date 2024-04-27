@@ -12,6 +12,14 @@ const JobOffersPage: React.FC = async () => {
                 ContractType: true,
                 Company: true,
                 ExperienceLevel: true,
+                Application: {
+                    include: {
+                        User: true,
+                        JobOffer: true,
+                        ApplicationStatus: true
+                    }
+
+                }
             }
         }
     )

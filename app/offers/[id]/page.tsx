@@ -3,6 +3,8 @@ import { getJobOfferWithExternalModels } from "@/services/jobOffers/getJobOffer"
 import { redirect } from "next/navigation";
 import { Card, CardBody, Chip } from "@nextui-org/react";
 import { Image } from "@nextui-org/image";
+import { Button } from "@nextui-org/button";
+import Link from "next/link";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const jobOffer = await getJobOfferWithExternalModels(params.id);
@@ -25,6 +27,9 @@ export default async function Page({ params }: { params: { id: string } }) {
                 />
               </div>
               <div className="my-4 flex flex-col gap-4">
+                <Button as={Link} href={`${jobOffer.id}/apply`} className="mb-4">
+                  Aplikuj
+                </Button>
                 <Chip className="bg-blue-100">
                   <p className=" flex items-center">
                     <i className="bi bi-geo-alt mr-2"></i>

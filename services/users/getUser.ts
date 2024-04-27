@@ -12,6 +12,39 @@ export const getUser = async () => {
     where: {
       kindeId: kindeUser?.id,
     },
+    include: {
+      managedCompanies: {
+        include: {
+          JobOffers: {
+            include: {
+              City: true,
+              Company: true,
+              ContractType: true,
+              Category: true,
+              Technology: true,
+              ExperienceLevel: true,
+              Application: true,
+            },
+          },
+        },
+      },
+      applications: {
+        include: {
+          JobOffer: {
+            include: {
+              City: true,
+              Company: true,
+              ContractType: true,
+              Category: true,
+              Technology: true,
+              ExperienceLevel: true,
+              Application: true,
+            },
+          },
+            ApplicationStatus: true,
+        },
+      },
+    },
   });
 };
 
@@ -36,8 +69,25 @@ export const getUserWithExternalModels = async () => {
               Category: true,
               Technology: true,
               ExperienceLevel: true,
+              Application: true,
             },
           },
+        },
+      },
+      applications: {
+        include: {
+          JobOffer: {
+            include: {
+              City: true,
+              Company: true,
+              ContractType: true,
+              Category: true,
+              Technology: true,
+              ExperienceLevel: true,
+              Application: true,
+            },
+          },
+          ApplicationStatus: true,
         },
       },
     },

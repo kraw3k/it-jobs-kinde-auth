@@ -35,12 +35,12 @@ export default function EmployerOffersTable({
           {jobOffers.map((jobOffer) => (
             <TableRow key={jobOffer.id}>
               <TableCell>
-                <Link as={NextLink} href={`${company.id}/offer/2`}>
+                <Link as={NextLink} href={`${company.id}/offer/${jobOffer.id}`}>
                   {jobOffer.title}
                 </Link>
               </TableCell>
               <TableCell>{jobOffer.City.name}</TableCell>
-              <TableCell>NOT_IMPLEMENTED</TableCell>
+              <TableCell>{jobOffer.Application.length}</TableCell>
             </TableRow>
           ))}
         </TableBody>
