@@ -10,12 +10,7 @@ const jobOfferWithExternalModels =
       Technology: true,
       ExperienceLevel: true,
       ContractType: true,
-      Application: {
-        include: {
-          ApplicationStatus: true,
-          User: true,
-        },
-      },
+      Application: true,
     },
   });
 export type JobOfferWithExternalModels = Prisma.JobOfferGetPayload<

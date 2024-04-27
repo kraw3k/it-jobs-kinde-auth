@@ -18,7 +18,7 @@ model User {
   avatarUrl        String?
   role             Role          @default(USER)
   managedCompanies Company[]
-  applications     Application[]
+  Application      Application[]
 }
 
 enum Role {

@@ -28,7 +28,7 @@ export const getUser = async () => {
           },
         },
       },
-      applications: {
+      Application: {
         include: {
           JobOffer: {
             include: {
@@ -41,7 +41,8 @@ export const getUser = async () => {
               Application: true,
             },
           },
-            ApplicationStatus: true,
+          ApplicationStatus: true,
+          User: true,
         },
       },
     },
@@ -74,7 +75,7 @@ export const getUserWithExternalModels = async () => {
           },
         },
       },
-      applications: {
+      Application: {
         include: {
           JobOffer: {
             include: {
@@ -88,8 +89,27 @@ export const getUserWithExternalModels = async () => {
             },
           },
           ApplicationStatus: true,
+          User: true,
         },
       },
+
+      // applications: {
+      //   include: {
+      //     JobOffer: {
+      //       include: {
+      //         City: true,
+      //         Company: true,
+      //         ContractType: true,
+      //         Category: true,
+      //         Technology: true,
+      //         ExperienceLevel: true,
+      //         Application: true,
+      //       },
+      //     },
+      //     ApplicationStatus: true,
+      //     User: true,
+      //   },
+      // },
     },
   });
 

@@ -18,7 +18,7 @@ export default async function Profile() {
       <br />
       <br />
       <h1 className="text-xl mb-4">Aplikacje</h1>
-      <ApplicationsTable applications={user.applications} />
+      <ApplicationsTable applications={user.Application} />
     </div>
   );
 }
