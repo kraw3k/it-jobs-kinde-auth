@@ -1,34 +1,27 @@
-import React from 'react';
-import prisma from "@/lib/prisma";
-import JobOffersTable from '@/components/JobOffersTable';
+import React from "react";
+import JobOffersTable from "@/components/offer/JobOffersTable";
+import { getOffersWithExternalModels } from "@/services/jobOffers/getJobOffers";
+import { getCategoriesWithExternalModels } from "@/services/categories/getCategories";
+import { getCitiesWithExternalModels } from "@/services/cities/getCities";
+import { getExperienceLevelsWithExternalModels } from "@/services/experienceLevels/getExperienceLevels";
 
 const JobOffersPage: React.FC = async () => {
-    const jobOffers = await prisma.jobOffer.findMany(
-        {
-            include: {
-                Category: true,
-                Technology: true,
-                City: true,
-                ContractType: true,
-                Company: true,
-                ExperienceLevel: true,
-                Application: {
-                    include: {
-                        User: true,
-                        JobOffer: true,
-                        ApplicationStatus: true
-                    }
+  const jobOffers = await getOffersWithExternalModels();
+  const categories = await getCategoriesWithExternalModels();
+  const cities = await getCitiesWithExternalModels();
+  const experienceLevels = await getExperienceLevelsWithExternalModels();
 
-                }
-            }
-        }
-    )
-    return (
-        <div>
-            <h1 className="text-xl mb-4">Dostępne oferty pracy</h1>
-            <JobOffersTable jobOffers={jobOffers} />
-        </div>
-    );
+  return (
+    <div>
+      <h1 className="text-xl mb-4">Dostępne oferty pracy</h1>
+      <JobOffersTable
+        jobOffers={jobOffers}
+        categories={categories}
+        cities={cities}
+        experienceLevels={experienceLevels}
+      />
+    </div>
+  );
 };
 
 export default JobOffersPage;

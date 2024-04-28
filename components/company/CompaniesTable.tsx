@@ -19,6 +19,11 @@ type CompaniesTableProps = {
 };
 
 export default function CompaniesTable({ companies }: CompaniesTableProps) {
+  function getLocations(company: CompanyWithExternalModels) {
+    const locations = company.JobOffers.map((jobOffer) => jobOffer.City.name);
+    return Array.from(new Set(locations)).join(", ");
+  }
+
   return (
     <div>
       <h1 className="text-xl mb-4">Nasi partnerzy</h1>
@@ -28,6 +33,7 @@ export default function CompaniesTable({ companies }: CompaniesTableProps) {
         <TableHeader>
           <TableColumn>Firma</TableColumn>
           <TableColumn>Oferty pracy</TableColumn>
+          <TableColumn>Lokalizacje</TableColumn>
         </TableHeader>
         <TableBody>
           {companies.map((company) => {
@@ -52,6 +58,7 @@ export default function CompaniesTable({ companies }: CompaniesTableProps) {
                   </Link>
                 </TableCell>
                 <TableCell>{company.JobOffers.length}</TableCell>
+                <TableCell>{getLocations(company)}</TableCell>
               </TableRow>
             );
           })}
