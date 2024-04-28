@@ -1,9 +1,11 @@
 import { User } from "@nextui-org/user";
 import ApplicationsTable from "@/components/employer/ApplicationsTable";
 import { getUserWithExternalModels } from "@/services/users/getUser";
+import { redirect } from "next/navigation";
 
 export default async function Profile() {
   const user = await getUserWithExternalModels();
+  if (!user) return redirect("access-denied");
 
   return (
     <div>

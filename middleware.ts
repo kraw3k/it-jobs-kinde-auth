@@ -18,5 +18,5 @@ export default function middleware(req: NextRequest & { kindeAuth: any }) {
   return withAuth(req);
 }
 export const config = {
-  matcher: ["/admin", "/profile", "/employer", "/offers"]
+  matcher: ["/admin/:path*", "/profile/:path*", "/employer/:path*", "/offers/:path*", "/companies/:path*"],
 };

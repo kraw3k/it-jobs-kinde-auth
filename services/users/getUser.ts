@@ -53,7 +53,9 @@ export const getUserWithExternalModels = async () => {
   const { getUser } = getKindeServerSession();
   const kindeUser = await getUser();
 
-  if (!kindeUser) return redirect("/api/auth/login");
+  if(!kindeUser) return null;
+
+  // if (!kindeUser) return redirect("/api/auth/login");
 
   const user = await prisma.user.findUnique({
     where: {
@@ -95,6 +97,6 @@ export const getUserWithExternalModels = async () => {
     },
   });
 
-  if (!user) return redirect("/api/auth/login");
+  // if (!user) return redirect("/api/auth/login");
   return user;
 };
