@@ -8,18 +8,22 @@ export async function GET() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
+  console.log("User: ", user)
+
   if (!user || !user.id){
     // TODO: log to error tracking service
     console.log("Something went wrong with authentication, user: " + user);
-    return NextResponse.redirect(process.env.KINDE_SITE_URL + "/login");
+    return NextResponse.redirect(process.env.KINDE_SITE_URL + "/api/auth/login");
   }
 
   let dbUser = await prisma.user.findUnique({
     where: { kindeId: user.id },
   });
 
+  console.log("DB User: ", dbUser)
+
   if (!dbUser) {
-    dbUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         kindeId: user.id,
         firstName: user.given_name ?? "",
