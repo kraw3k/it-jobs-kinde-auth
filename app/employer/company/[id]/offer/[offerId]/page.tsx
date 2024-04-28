@@ -1,6 +1,5 @@
 import withCompanyManagementAccess from "@/utils/hoc/withCompanyManagementAccess";
 import { CompanyWithExternalModels } from "@/utils/types";
-import prisma from "@/lib/prisma";
 import { getJobOfferWithExternalModels } from "@/services/jobOffers/getJobOffer";
 import ApplicationsTable from "@/components/employer/ApplicationsTable";
 

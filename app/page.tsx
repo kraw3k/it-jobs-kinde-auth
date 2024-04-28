@@ -8,7 +8,7 @@ export default async function Home() {
       <div className=" lg:basis-2/4">
         <h1 className="text-6xl font-bold mb-8">Witaj w</h1>
         <h1 className="text-8xl font-bold mb-8">
-          <Code className="text-8xl">IT-JOBS</Code> !
+          <Code className="text-8xl">IT-PRACA</Code> !
         </h1>
         <h2 className="text-5xl font-bold mb-8">
           kosmicznym{" "}

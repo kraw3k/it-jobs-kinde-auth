@@ -1,9 +1,14 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/lib/prisma";
 import CompanyCreateForm from "@/components/employer/CompanyCreateForm";
+import {getUser} from "@/services/users/getUser";
+import {redirect} from "next/navigation";
 
 export default async function Admin() {
   const { getAccessToken, getPermissions } = getKindeServerSession();
+
+  const user = await getUser();
+  if(user?.role !== 'ADMIN') return redirect('/access-denied')
 
   // console.log(await getPermissions());
 
@@ -11,6 +16,7 @@ export default async function Admin() {
   const permissions = await getPermissions();
 
   const users = await prisma.user.findMany();
+
 
   return (
     <>

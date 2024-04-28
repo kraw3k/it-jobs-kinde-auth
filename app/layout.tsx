@@ -5,7 +5,7 @@ import Header from "@/components/ui/header/Header";
 import NextBreadcrumb from "@/components/NextBreadcrumb";
 
 export const metadata: Metadata = {
-  title: "IT-JOBS",
+  title: "IT-PRACA",
   description: "Find your dream job in IT!",
 };
 

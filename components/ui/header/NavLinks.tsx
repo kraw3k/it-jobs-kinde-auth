@@ -5,35 +5,64 @@ import NextLink from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 
-export default function NavLinks() {
+type NavLinksProps = {
+  userRole: "USER" | "EMPLOYER" | "ADMIN";
+};
+export default function NavLinks({ userRole }: NavLinksProps) {
   const pathname = usePathname();
 
   const isActive = (path: string) => {
     return path === pathname;
   };
 
-  const pages = [
-    {
-      name: "Oferty pracy",
-      path: "/offers",
-    },
-    {
-      name: "Pracodawcy",
-      path: "/companies",
-    },
-    {
-      name: "Dla pracodawcy",
-      path: "/employer",
-    },
-    {
-      name: "Admin",
-      path: "/admin",
-    },
-  ];
+  const pages = {
+    USER: [
+      {
+        name: "Oferty pracy",
+        path: "/offers",
+      },
+      {
+        name: "Pracodawcy",
+        path: "/companies",
+      },
+    ],
+    EMPLOYER: [
+      {
+        name: "Oferty pracy",
+        path: "/offers",
+      },
+      {
+        name: "Pracodawcy",
+        path: "/companies",
+      },
+      {
+        name: "Dla pracodawcy",
+        path: "/employer",
+      },
+    ],
+    ADMIN: [
+      {
+        name: "Oferty pracy",
+        path: "/offers",
+      },
+      {
+        name: "Pracodawcy",
+        path: "/companies",
+      },
+      {
+        name: "Dla pracodawcy",
+        path: "/employer",
+      },
+      {
+        name: "Panel administracyjny",
+        path: "/admin",
+      },
+    ],
+  };
 
   return (
     <>
-      {pages.map((page) => (
+      {pages[userRole].map((page) => (
         <NavbarItem isActive={isActive(page.path)} key={page.path}>
           <Link
             color={isActive(page.path) ? "primary" : "foreground"}
