@@ -1,12 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
-import {NextApiRequest} from "next";
 
 const prisma = new PrismaClient();
 
-export async function GET(req: NextApiRequest) {
-  const { getUser } = getKindeServerSession(req);
+export async function GET(request: Request) {
+  const { getUser } = getKindeServerSession(request);
   const kindeUser = await getUser();
 
   if (kindeUser === null) {
