@@ -8,6 +8,8 @@ export async function GET() {
   const { getUser } = getKindeServerSession();
   const kindeUser = await getUser();
 
+  console.log("kindeUser: ", kindeUser);
+
   if (kindeUser === null) {
     return NextResponse.json({ error: "Kinde user is null", kindeUser });
   }
@@ -41,5 +43,12 @@ export async function GET() {
     });
   }
 
-  return NextResponse.redirect(process.env.KINDE_SITE_URL + "/");
+  console.log("dbUser: ", dbUser);
+
+  const res = {
+    kindeUser: kindeUser,
+    dbUser,
+  };
+
+  return NextResponse.json(res);
 }

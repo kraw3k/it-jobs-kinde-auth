@@ -6,7 +6,7 @@ import NextBreadcrumb from "@/components/NextBreadcrumb";
 
 export const metadata: Metadata = {
   title: "IT-PRACA",
-  description: "Find your dream job in IT!",
+  description: "Znajdź swoją wymarzoną pracę w IT!",
 };
 
 export default function RootLayout({
