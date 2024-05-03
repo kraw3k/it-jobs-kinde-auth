@@ -1,15 +1,23 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { Code } from "@nextui-org/react";
+
+// This is a page where user is redirected after successful Kinde login.
+// It checks if user exists in database and create it if needed.
+// Normally it should be done in /api/auth/success,
+// but probably there is a bug - in route.ts Kinde getUser() always returns null when running in Vercel
 
 export default async function LoginSuccessPage() {
   const { getUser } = getKindeServerSession();
   const kindeUser = await getUser();
 
   if (kindeUser === null) {
-    // return NextResponse.json({ error: "Kinde user is null", kindeUser });
-    return <h1>Kinde user is null</h1>
+    return (
+      <div>
+        Wystąpił błąd: <Code>Kinde user is null</Code>
+      </div>
+    );
   }
 
   if (
@@ -18,11 +26,11 @@ export default async function LoginSuccessPage() {
     !kindeUser.family_name ||
     !kindeUser.email
   ) {
-    return <h1>Kinde user properties missing</h1>
-    // return NextResponse.json({
-    //   error: "Kinde user properties missing",
-    //   kindeUser,
-    // });
+    return (
+      <div>
+        Wystąpił błąd: <Code>Kinde user properties missing</Code>
+      </div>
+    );
   }
 
   const dbUser = await prisma.user.findUnique({
@@ -41,7 +49,5 @@ export default async function LoginSuccessPage() {
       },
     });
   }
-  return redirect(process.env.KINDE_SITE_URL + "/")
-  // return <h1>SUCCESS</h1>;
-  // return NextResponse.redirect(process.env.KINDE_SITE_URL + "/");
+  return redirect(process.env.KINDE_SITE_URL + "/");
 }
