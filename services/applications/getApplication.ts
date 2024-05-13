@@ -11,7 +11,6 @@ export const getApplicationWithExternalModels = async (id: string) => {
           Company: true,
           ContractType: true,
           Category: true,
-          Technology: true,
           ExperienceLevel: true,
         },
       },

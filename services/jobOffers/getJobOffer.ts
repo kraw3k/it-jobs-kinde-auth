@@ -8,7 +8,6 @@ export const getJobOfferWithExternalModels = async (id: string) => {
       Company: true,
       ContractType: true,
       Category: true,
-      Technology: true,
       ExperienceLevel: true,
       Application: {
         include: {
@@ -19,7 +18,6 @@ export const getJobOfferWithExternalModels = async (id: string) => {
               Company: true,
               ContractType: true,
               Category: true,
-              Technology: true,
               ExperienceLevel: true,
             },
           },

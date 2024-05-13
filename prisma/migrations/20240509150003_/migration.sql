@@ -26,7 +26,6 @@ CREATE TABLE "JobOffer" (
     "companyId" INTEGER NOT NULL,
     "cityId" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
-    "technologyId" INTEGER NOT NULL,
     "contractTypeId" INTEGER NOT NULL,
     "experienceLevelId" INTEGER NOT NULL,
 
@@ -37,6 +36,7 @@ CREATE TABLE "JobOffer" (
 CREATE TABLE "Company" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "shortDescription" TEXT,
     "description" TEXT,
     "logoUrl" TEXT,
 
@@ -57,14 +57,6 @@ CREATE TABLE "Category" (
     "name" TEXT NOT NULL,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Technology" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-
-    CONSTRAINT "Technology_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -140,9 +132,6 @@ ALTER TABLE "JobOffer" ADD CONSTRAINT "JobOffer_contractTypeId_fkey" FOREIGN KEY
 
 -- AddForeignKey
 ALTER TABLE "JobOffer" ADD CONSTRAINT "JobOffer_experienceLevelId_fkey" FOREIGN KEY ("experienceLevelId") REFERENCES "ExperienceLevel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "JobOffer" ADD CONSTRAINT "JobOffer_technologyId_fkey" FOREIGN KEY ("technologyId") REFERENCES "Technology"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Application" ADD CONSTRAINT "Application_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

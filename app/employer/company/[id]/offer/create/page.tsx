@@ -24,7 +24,6 @@ async function Page({ company }: PageProps) {
   const experienceLevelItems = mapToSelectItems(
     await prisma.experienceLevel.findMany(),
   );
-  const technologyItems = mapToSelectItems(await prisma.technology.findMany());
 
   async function createJobOffer(formData: FormData) {
     "use server";
@@ -40,7 +39,6 @@ async function Page({ company }: PageProps) {
         cityId: Number(formData.get("city")),
         contractTypeId: Number(formData.get("contractType")),
         experienceLevelId: Number(formData.get("experienceLevel")),
-        technologyId: Number(formData.get("technology")),
       },
     });
     redirect(`/employer/company/${company.id}/offer/${offer.id}`);
@@ -55,7 +53,6 @@ async function Page({ company }: PageProps) {
         cityItems={cityItems}
         contractTypeItems={contractTypeItems}
         experienceLevelItems={experienceLevelItems}
-        technologyItems={technologyItems}
       />
     </div>
   );

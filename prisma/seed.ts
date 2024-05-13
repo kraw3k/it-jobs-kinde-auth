@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import { companies } from "./seedData/companies";
 import { jobOffers } from "./seedData/jobOffers";
 import { categories } from "./seedData/categories";
-import { technologies } from "./seedData/technologies";
 import { contractTypes } from "./seedData/contractTypes";
 import { experienceLevels } from "./seedData/experienceLevels";
 import { cities } from "./seedData/cities";
@@ -12,13 +11,13 @@ import { users } from "./seedData/users";
 
 const prisma = new PrismaClient();
 
-const seedUsers = async () => {
-  for (const user of users) {
-    await prisma.user.create({
-      data: user,
-    });
-  }
-};
+// const seedUsers = async () => {
+//   for (const user of users) {
+//     await prisma.user.create({
+//       data: user,
+//     });
+//   }
+// };
 const seedCompanies = async () => {
   for (const company of companies) {
     await prisma.company.create({
@@ -30,13 +29,6 @@ const seedCategories = async () => {
   for (const category of categories) {
     await prisma.category.create({
       data: category,
-    });
-  }
-};
-const seedTechnologies = async () => {
-  for (const technology of technologies) {
-    await prisma.technology.create({
-      data: technology,
     });
   }
 };
@@ -77,25 +69,24 @@ const seedApplicationStatuses = async () => {
   }
 };
 
-const seedApplications = async () => {
-  for (const application of applications) {
-    await prisma.application.create({
-      data: application,
-    });
-  }
-};
+// const seedApplications = async () => {
+//   for (const application of applications) {
+//     await prisma.application.create({
+//       data: application,
+//     });
+//   }
+// };
 
 async function main() {
-  await seedUsers();
+  // await seedUsers();
   await seedCompanies();
   await seedCategories();
-  await seedTechnologies();
   await seedContractTypes();
   await seedExperienceLevels();
   await seedCities();
   await seedJobOffers();
   await seedApplicationStatuses();
-  await seedApplications();
+  // await seedApplications();
 }
 
 main()

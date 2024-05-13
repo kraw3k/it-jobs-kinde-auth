@@ -1,4 +1,4 @@
-import { formatSalary } from "@/utils/helpers";
+  import { formatSalary } from "@/utils/helpers";
 import { getJobOfferWithExternalModels } from "@/services/jobOffers/getJobOffer";
 import { redirect } from "next/navigation";
 import { Card, CardBody, Chip } from "@nextui-org/react";
@@ -60,12 +60,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                   <p className=" flex items-center">
                     <i className="bi bi-star mr-2"></i>
                     {jobOffer.ExperienceLevel.name}
-                  </p>
-                </Chip>
-                <Chip className="bg-gray-200">
-                  <p className=" flex items-center">
-                    <i className="bi bi-code mr-2"></i>
-                    {jobOffer.Technology.name}
                   </p>
                 </Chip>
               </div>

@@ -8,7 +8,6 @@ type OfferCreateFormProps = {
   cityItems: { value: string; label: string }[];
   contractTypeItems: { value: string; label: string }[];
   experienceLevelItems: { value: string; label: string }[];
-  technologyItems: { value: string; label: string }[];
 };
 
 const OfferCreateForm = ({
@@ -17,7 +16,6 @@ const OfferCreateForm = ({
   cityItems,
   contractTypeItems,
   experienceLevelItems,
-  technologyItems,
 }: OfferCreateFormProps) => {
   return (
     <form action={formAction} className="flex flex-col items-center gap-2">
@@ -83,13 +81,6 @@ const OfferCreateForm = ({
         ))}
       </Select>
       <br />
-      <Select label="Technologia" className="max-w" name="technology" size="sm">
-        {technologyItems.map((technology) => (
-          <SelectItem key={technology.value} value={technology.value}>
-            {technology.label}
-          </SelectItem>
-        ))}
-      </Select>
       <br />
       <Button type="submit">Utwórz</Button>
     </form>

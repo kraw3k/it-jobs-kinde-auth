@@ -9,7 +9,6 @@ export const getCompaniesWithExternalModels = async () => {
           Company: true,
           ContractType: true,
           Category: true,
-          Technology: true,
           ExperienceLevel: true,
           Application: {
             include: {
