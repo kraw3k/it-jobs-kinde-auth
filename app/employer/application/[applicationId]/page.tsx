@@ -1,5 +1,5 @@
 import { getApplicationWithExternalModels } from "@/services/applications/getApplication";
-import ApplicationSummary from "@/components/application/ApplicationSummary";
+import ApplicationSummary from "@/components/employer/application/ApplicationSummary";
 import { Image } from "@nextui-org/image";
 
 type ApplicationPageProps = {

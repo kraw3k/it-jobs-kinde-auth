@@ -1,7 +1,7 @@
 import withCompanyManagementAccess from "@/utils/hoc/withCompanyManagementAccess";
 import { CompanyWithExternalModels } from "@/utils/types";
 import { getJobOfferWithExternalModels } from "@/services/jobOffers/getJobOffer";
-import ApplicationsTable from "@/components/employer/ApplicationsTable";
+import ApplicationsTable from "@/components/employer/application/ApplicationsTable";
 
 type PageProps = {
   params: {

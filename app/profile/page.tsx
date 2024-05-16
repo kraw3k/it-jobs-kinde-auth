@@ -1,7 +1,7 @@
 import { User } from "@nextui-org/user";
-import ApplicationsTable from "@/components/employer/ApplicationsTable";
 import { getUserWithExternalModels } from "@/services/users/getUser";
 import { redirect } from "next/navigation";
+import ApplicationsTable from "@/components/profile/aplication/ApplicationsTable";
 
 export default async function Profile() {
   const user = await getUserWithExternalModels();
@@ -19,7 +19,7 @@ export default async function Profile() {
       />
       <br />
       <br />
-      <h1 className="text-xl mb-4">Aplikacje</h1>
+      <h1 className="text-xl mb-4">Moje aplikacje</h1>
       <ApplicationsTable applications={user.Application} />
     </div>
   );
