@@ -13,10 +13,12 @@ import { ApplicationWithExternalModels } from "@/utils/types";
 
 type ApplicationsTableProps = {
   applications: ApplicationWithExternalModels[] | undefined;
+  offerId: string;
 };
 
 export default function ApplicationsTable({
   applications,
+    offerId,
 }: ApplicationsTableProps) {
   if (!applications) return null;
   return (
@@ -38,7 +40,7 @@ export default function ApplicationsTable({
           .map((application) => (
             <TableRow key={application.id}>
               <TableCell>
-                <Link href={`/employer/application/${application.id}`}>
+                <Link href={`${offerId}/application/${application.id}`}>
                   {application.JobOffer.title} - {application.JobOffer.Company.name}
                 </Link>
               </TableCell>

@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="w-3/4 mx-auto">
+    <div className="md:w-3/4 mx-auto">
       <Card>
         <CardBody>
           <div className="flex gap-x-8 p-4">

@@ -60,7 +60,7 @@ export default function ApplicationSummary({
               className="ml-2"
               size="sm"
               as={Link}
-              href={`/employer/application/${application.id}/update`}
+              href={`${application.id}/update`}
             >
               Edytuj
             </Button>

@@ -8,6 +8,24 @@ type OfferApplyFormProps = {
 
 const OfferApplyForm = ({ formAction }: OfferApplyFormProps) => {
   const handleSubmit = (formData: FormData) => {
+    const data = {
+      fullName: formData.get("fullName") as string,
+      email: formData.get("email") as string,
+      phone: formData.get("phone") as string,
+      description: formData.get("description") as string,
+      cv: formData.get("cv") as File,
+      gdpr: formData.get("gdpr") as string,
+    };
+      console.log(data)
+    if (
+      !data.fullName ||
+      !data.email ||
+      !data.phone ||
+      !data.description ||
+      !data.cv ||
+      data.gdpr === null
+    )
+      return alert("Wypełnij wszystkie pola");
     formAction(formData);
   };
   return (

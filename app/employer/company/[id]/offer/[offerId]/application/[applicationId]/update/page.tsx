@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import ApplicationUpdateForm from "@/components/employer/application/ApplicationUpdateForm";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
+import withCompanyManagementAccess from "@/utils/hoc/withCompanyManagementAccess";
 
 type ApplicationUpdatePageParams = {
   params: {
@@ -8,7 +9,7 @@ type ApplicationUpdatePageParams = {
   };
 };
 
-export default async function ApplicationUpdatePage({
+async function ApplicationUpdatePage({
   params,
 }: ApplicationUpdatePageParams) {
   const application = await prisma.application.findUnique({
@@ -32,7 +33,7 @@ export default async function ApplicationUpdatePage({
       },
     });
 
-    redirect(`/employer/application/${application.id}`);
+    redirect(`../${application.id}`, RedirectType.replace);
   }
 
   if (!application) return <div>Brak aplikacji</div>;
@@ -56,3 +57,5 @@ export default async function ApplicationUpdatePage({
     </div>
   );
 }
+
+export default withCompanyManagementAccess(ApplicationUpdatePage);

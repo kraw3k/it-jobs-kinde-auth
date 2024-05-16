@@ -17,8 +17,24 @@ const OfferCreateForm = ({
   contractTypeItems,
   experienceLevelItems,
 }: OfferCreateFormProps) => {
+
+    const handleSubmit = (formData: FormData) => {
+        const data = {
+            title: formData.get("title") as string,
+            description: formData.get("description") as string,
+            salaryMin: Number(formData.get("salaryMin")),
+            salaryMax: Number(formData.get("salaryMax")),
+            category: Number(formData.get("category")),
+            city: Number(formData.get("city")),
+            contractType: Number(formData.get("contractType")),
+            experienceLevel: Number(formData.get("experienceLevel")),
+        }
+        if(!data.title || !data.description || !data.salaryMin || !data.salaryMax || !data.category || !data.city || !data.contractType || !data.experienceLevel) return alert("Wypełnij wszystkie pola");
+        formAction(formData);
+    }
+
   return (
-    <form action={formAction} className="flex flex-col items-center gap-2">
+    <form action={handleSubmit} className="flex flex-col items-center gap-2">
       <Input
         type="text"
         name="title"

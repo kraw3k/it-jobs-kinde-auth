@@ -11,14 +11,14 @@ async function hasEmployeeAccess(companyId: number) {
 }
 
 type ComponentProps = {
-  params: { id: string, offerId: string };
+  params: { id: string, offerId: string, applicationId: string };
   company: CompanyWithExternalModels;
 };
 
 const withCompanyManagementAccess = (
   Component: React.ComponentType<ComponentProps>,
 ) => {
-  return async (props: { params: { id: string, offerId: string } }) => {
+  return async (props: { params: { id: string, offerId: string, applicationId: string } }) => {
     const company = await getCompanyWithExternalModels(props.params.id);
     if (!company) {
       return redirect("/not-found");

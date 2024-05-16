@@ -1,6 +1,7 @@
 import { getApplicationWithExternalModels } from "@/services/applications/getApplication";
 import ApplicationSummary from "@/components/employer/application/ApplicationSummary";
 import { Image } from "@nextui-org/image";
+import withCompanyManagementAccess from "@/utils/hoc/withCompanyManagementAccess";
 
 type ApplicationPageProps = {
   params: {
@@ -8,9 +9,7 @@ type ApplicationPageProps = {
   };
 };
 
-export default async function ApplicationPage({
-  params,
-}: ApplicationPageProps) {
+async function ApplicationPage({ params }: ApplicationPageProps) {
   const application = await getApplicationWithExternalModels(
     params.applicationId,
   );
@@ -37,3 +36,5 @@ export default async function ApplicationPage({
     </div>
   );
 }
+
+export default withCompanyManagementAccess(ApplicationPage);
