@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Link,
   Table,
   TableBody,
   TableCell,
@@ -13,18 +12,15 @@ import { ApplicationWithExternalModels } from "@/utils/types";
 
 type ApplicationsTableProps = {
   applications: ApplicationWithExternalModels[] | undefined;
-  offerId: string;
 };
 
 export default function ApplicationsTable({
   applications,
-    offerId,
 }: ApplicationsTableProps) {
   if (!applications) return null;
   return (
     <Table>
       <TableHeader>
-        <TableColumn>Pozycja</TableColumn>
         <TableColumn>Imię i nazwisko</TableColumn>
         <TableColumn>Email</TableColumn>
         <TableColumn>Data aplikacji</TableColumn>
@@ -34,19 +30,11 @@ export default function ApplicationsTable({
         {applications
           ?.sort(
             (a, b) =>
-              new Date(b.createdAt).getTime() -
-              new Date(a.createdAt).getTime(),
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
           )
           .map((application) => (
             <TableRow key={application.id}>
-              <TableCell>
-                <Link href={`${offerId}/application/${application.id}`}>
-                  {application.JobOffer.title} - {application.JobOffer.Company.name}
-                </Link>
-              </TableCell>
-              <TableCell>
-                  {application.fullName}
-              </TableCell>
+              <TableCell>{application.fullName}</TableCell>
               <TableCell>{application.email}</TableCell>
               <TableCell>
                 {new Date(application.createdAt).toUTCString()}

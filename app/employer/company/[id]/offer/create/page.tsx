@@ -4,16 +4,11 @@ import { redirect } from "next/navigation";
 import { CompanyWithExternalModels } from "@/utils/types";
 import OfferCreateForm from "@/components/offer/OfferCreateForm";
 import sanitizeHtml from "sanitize-html";
+import { mapToSelectItems } from "@/utils/helpers";
 
 type PageProps = {
   company: CompanyWithExternalModels;
 };
-
-const mapToSelectItems = (items: { id: number; name: string }[]) =>
-  items.map((item) => ({
-    value: item.id.toString(),
-    label: item.name,
-  }));
 
 async function Page({ company }: PageProps) {
   const categoryItems = mapToSelectItems(await prisma.category.findMany());

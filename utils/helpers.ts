@@ -12,3 +12,10 @@ export const formatSalary = (min: number, max: number) => {
   if (min === max) return formatCurrency(min);
     return `${formatCurrency(min)} - ${formatCurrency(max)}`;
 };
+
+
+export const mapToSelectItems = (items: { id: number; name: string }[]) =>
+    items.map((item) => ({
+      value: item.id.toString(),
+      label: item.name,
+    }));
